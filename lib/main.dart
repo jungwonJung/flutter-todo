@@ -158,18 +158,19 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                   Positioned(
-                      right: 16.0,
-                      bottom: 16.0,
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.orange,
-                        onPressed: () {},
-                        shape: const CircleBorder(),
-                        child: const Icon(
-                          Icons.create_sharp,
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                      )),
+                    right: 16.0,
+                    bottom: 16.0,
+                    child: FloatingActionButton(
+                      backgroundColor: Colors.orange,
+                      onPressed: () {},
+                      shape: const CircleBorder(),
+                      child: const Icon(
+                        Icons.create_sharp,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
