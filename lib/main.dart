@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,8 +46,31 @@ class WaveClipper extends CustomClipper<Path> {
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key});
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  late String dow;
+  late String month;
+  late String day;
+
+  @override
+  void initState() {
+    super.initState();
+    updateDay();
+  }
+
+  void updateDay() {
+    setState(() {
+      dow = DateFormat('EEEE').format(DateTime.now());
+      month = DateFormat('MMMM').format(DateTime.now());
+      day = DateFormat('dd').format(DateTime.now());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +80,8 @@ class MainPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
         toolbarHeight: 80.0,
-        flexibleSpace: const Padding(
-          padding: EdgeInsets.only(top: 50, bottom: 10),
+        flexibleSpace: Padding(
+          padding: const EdgeInsets.only(top: 50, bottom: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -66,19 +90,19 @@ class MainPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Friday",
-                    style: TextStyle(
+                    dow,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 28,
                     ),
                   ),
                   Text(
-                    "September 2",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    '$month  $day',
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.settings,
                 size: 40,
                 color: Colors.blueGrey,
@@ -114,8 +138,9 @@ class MainPage extends StatelessWidget {
                   ),
                   Positioned(
                     child: Column(
-                      children: [
-                        SizedBox(
+                      children: List.generate(
+                        8,
+                        (index) => SizedBox(
                           height: 70,
                           child: Container(
                             margin: const EdgeInsets.all(0),
@@ -129,105 +154,7 @@ class MainPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Container(
-                            margin: const EdgeInsets.all(0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Color.fromARGB(255, 153, 196, 231),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                   Positioned(
