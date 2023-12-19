@@ -88,8 +88,9 @@ class MainPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 32),
-        child: Stack(
+        padding: const EdgeInsets.only(top: 32, bottom: 70),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ClipPath(
               clipper: WaveClipper(),
@@ -98,11 +99,139 @@ class MainPage extends StatelessWidget {
                 color: Colors.blueGrey[50],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 80.0),
-              width: 2.0,
-              height: screenHeight,
-              color: Colors.red[200],
+            Expanded(
+              child: Stack(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 80.0),
+                        width: 2.0,
+                        height: screenHeight,
+                        color: Colors.red[200],
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: Container(
+                            margin: const EdgeInsets.all(0),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Color.fromARGB(255, 153, 196, 231),
+                                  width: 1.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
