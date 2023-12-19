@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -65,14 +68,17 @@ class _MainPageState extends State<MainPage> {
   late String month;
   late String day;
   late TextEditingController _todoController;
+  late SharedPreferences _preferences;
 
   List<TodoItem> todoList = [];
 
   @override
   void initState() {
     super.initState();
-    updateDay();
     _todoController = TextEditingController();
+    _loadData();
+    updateDay();
+    _initializeTimer();
   }
 
   void updateDay() {
@@ -80,6 +86,41 @@ class _MainPageState extends State<MainPage> {
       dow = DateFormat('EEEE').format(DateTime.now());
       month = DateFormat('MMMM').format(DateTime.now());
       day = DateFormat('dd').format(DateTime.now());
+    });
+  }
+
+  void _initializeTimer() {
+    DateTime now = DateTime.now();
+    DateTime tomorrowSixAM =
+        DateTime(now.year, now.month, now.day + 1, 6, 0, 0);
+
+    Duration timeUntilSixAM = tomorrowSixAM.difference(now);
+
+    Timer.periodic(timeUntilSixAM, (Timer timer) {
+      _clearTodoList();
+    });
+  }
+
+  Future<void> _loadData() async {
+    _preferences = await SharedPreferences.getInstance();
+    List<String>? savedList = _preferences.getStringList('todoList');
+
+    if (savedList != null) {
+      setState(() {
+        todoList = savedList.map((item) => TodoItem(title: item)).toList();
+      });
+    }
+  }
+
+  Future<void> _saveData() async {
+    List<String> stringList = todoList.map((item) => item.title).toList();
+    await _preferences.setStringList('todoList', stringList);
+  }
+
+  void _clearTodoList() {
+    setState(() {
+      todoList.clear();
+      _saveData();
     });
   }
 
@@ -119,7 +160,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ],
               ),
-              if (todoList.isNotEmpty) // 리스트가 비어있지 않을 때만 아이콘 표시
+              if (todoList.isNotEmpty)
                 IconButton(
                   onPressed: () {
                     _showDeleteDialog(context);
@@ -198,6 +239,7 @@ class _MainPageState extends State<MainPage> {
                                 setState(() {
                                   todoList[index].isChecked = value ?? false;
                                 });
+                                _saveData();
                               },
                               activeColor: Colors.blue,
                               checkColor: Colors.white,
@@ -244,7 +286,7 @@ class _MainPageState extends State<MainPage> {
 
   Future<void> _showAddTodoDialog(BuildContext context) async {
     String newTodo = '';
-    _todoController.clear(); // 추가: TextField 초기화
+    _todoController.clear();
 
     return showDialog<void>(
       context: context,
@@ -279,6 +321,7 @@ class _MainPageState extends State<MainPage> {
                   setState(() {
                     todoList.add(TodoItem(title: newTodo));
                   });
+                  _saveData(); // 변경된 리스트를 저장
                   Navigator.of(context).pop();
                 }
               },
@@ -317,6 +360,7 @@ class _MainPageState extends State<MainPage> {
                 setState(() {
                   todoList.clear();
                 });
+                _saveData();
                 Navigator.of(context).pop();
               },
               child: const Text(
